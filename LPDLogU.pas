@@ -37,6 +37,7 @@ unit LPDLogU;
 interface
 
 uses
+  {$ifdef unix}cmem, cthreads,{$endif}
   Classes, SysUtils, zipper, DateUtils, fgl;
 
 type
