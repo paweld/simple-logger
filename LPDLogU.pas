@@ -422,7 +422,7 @@ end;
 procedure TSaveLogThread.Execute;
 var
   sleepms: Integer;
-  cs: Int64;
+  cs: QWord;
 
   function GetSleepMs: Integer; inline;
   begin
@@ -433,7 +433,7 @@ var
   end;
 
 begin
-  sleepms := GetSleepMs;
+  sleepms := 0;
   cs := GetTickCount64;
   while not Terminated do
   begin
@@ -497,6 +497,8 @@ end;
 
 destructor TLogger.Destroy;
 begin
+  while FLogList.Count > 0 do
+    sleep(1); 
   if FSaveThread <> nil then
   begin
     FSaveThread.Terminate;
